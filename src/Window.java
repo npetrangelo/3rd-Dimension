@@ -38,7 +38,8 @@ public class Window extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Creates the instance of the Framework.java that extends the Canvas.java and puts it on the frame.
-        this.setContentPane(new Framework());
+//        this.setContentPane(new Framework());
+        this.add(new Framework());
         
         this.setVisible(true);
     }
