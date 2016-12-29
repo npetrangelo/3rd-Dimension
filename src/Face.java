@@ -51,23 +51,47 @@ public class Face
                 intersections.add(intersection);
             }
         }
+        intersections.sort(CubePoint::compareByX);
         System.out.println("Face.updateIntersections intersections=" + intersections);
     }
     
-    @Override
-    public String toString()
+    public Line getIntersection(double zPlane)
     {
-        return "Face [points=" + points + ", edges=" + edges + ", intersections=" + intersections + ", projection=" + projection
-                + "]";
+        ArrayList<CubePoint> intersections = new ArrayList<CubePoint>();
+        for (Line edge : edges)
+        {
+            CubePoint intersection = edge.makeIntersection(zPlane);
+            if (intersection != null)
+            {
+                System.out.println("Face.getIntersection intersection=" + intersection);
+                intersections.add(intersection);
+            }
+        }
+        intersections.sort(CubePoint::compareByX);
+        if (intersections.isEmpty())
+        {
+                return null;
+        }
+        return new Line(intersections.get(0), intersections.get(1));
     }
-
+    
     public void drawIntersection(Graphics2D g2d)
     {
         System.out.println(intersections.size());
         if (!intersections.isEmpty())
         {
-            Line intersection = new Line(intersections.get(0), intersections.get(1));
-            intersection.Draw(g2d);
+            for (int i = 0; i <= intersections.size()-2; i += 2)
+            {
+                Line intersection = new Line(intersections.get(i), intersections.get(i+1));
+                intersection.Draw(g2d);
+            }
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Face [points=" + points + ", edges=" + edges + ", intersections=" + intersections + ", projection=" + projection
+                + "]";
     }
 }

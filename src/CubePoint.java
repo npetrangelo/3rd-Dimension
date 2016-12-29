@@ -44,4 +44,15 @@ public class CubePoint
     {
         return this.getClass().getName() + "[" + x + "," + y + "," + z + "]";
     }
+
+    public int compareByX(CubePoint that)
+    {
+        if (this.x < that.x) {
+            return -1;
+        } else if (this.x > that.x) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

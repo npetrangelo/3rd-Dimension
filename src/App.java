@@ -83,11 +83,11 @@ public class App {
 //        y1 = Math.sin(Math.toRadians(increment)) * 50;
 //        y2 = -y1;
 //        cube1.translate(0, 0, 1);
+//        cube.rotateY(1);
+//        cube.rotateX(1);
         cube.translate(0, 0, 0.25);
         cube.updateFaces();
         cube.updateIntersections(150);
-//        cube.rotateY(1);
-//        cube.rotateX(1);
     }
     
     /**

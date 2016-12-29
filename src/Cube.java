@@ -10,7 +10,7 @@ public class Cube
     public CubePoint[][][] pts = new CubePoint[2][2][2];
     public ArrayList<Line> edges = new ArrayList<Line>();
     public ArrayList<Face> faces = new ArrayList<Face>();
-    public Polygon intersection = new Polygon();
+    public ArrayList<Line> intersections = new ArrayList<Line>();
     public CubePoint center;
     
     public Cube(int length)
@@ -106,7 +106,6 @@ public class Cube
     
     public void updateIntersections(double zPlane)
     {
-//        intersection.reset();
 //        for (Line edge : edges)
 //        {
 //            CubePoint intersectionPt = edge.makeIntersection(zPlane);
@@ -116,19 +115,26 @@ public class Cube
 //                intersection.addPoint(projected.x, projected.y);
 //            }
 //        }
+        intersections.clear();
         for (Face face : faces)
         {
-            face.updateIntersections(zPlane);
-            System.out.println("Cube.updateIntersections face=" + face);
+            Line intersection = face.getIntersection(zPlane);
+            if (intersection != null)
+            {
+                intersections.add(intersection);
+            }
         }
     }
     
     public void DrawIntersections(Graphics2D g2d)
     {
-//        g2d.drawPolygon(intersection);
-        for (Face face : faces)
+        if (!intersections.isEmpty())
         {
-            face.drawIntersection(g2d);
+            System.out.println(intersections);
+            for (Line intersection : intersections)
+            {
+                intersection.Draw(g2d);
+            }
         }
     }
     
