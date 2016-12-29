@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.ArrayList;
 
 
 /**
@@ -22,10 +23,7 @@ public class App {
     private double z2 = 1.0;
     
     private Cube cube = new Cube(50);
-    private Intersection2D intersection1;
-    private Intersection2D intersection2;
-    private Intersection2D intersection3;
-    private Intersection2D intersection4;
+    private ArrayList<Intersection2D> intersections = new ArrayList<Intersection2D>();
 
     
     private int increment = 0;
@@ -50,8 +48,8 @@ public class App {
      */
     private void Initialize()
     {
-        cube.rotateY(25);
-        cube.rotateX(15);
+        cube.rotateY(45);
+        cube.rotateX(35);
     }
     
     /**
@@ -93,10 +91,11 @@ public class App {
         cube.translate(0, 0, 0.25);
         cube.updateFaces();
 //        cube.updateIntersections(150);
-        intersection1 = cube.getIntersection(145);
-        intersection2 = cube.getIntersection(150);
-        intersection3 = cube.getIntersection(155);
-        intersection4 = cube.getIntersection(160);
+        intersections.clear();
+        for (int i = 170; i >= 150; i--)
+        {
+            intersections.add(cube.getIntersection(i));
+        }
     }
     
     /**
@@ -110,25 +109,15 @@ public class App {
         g2d.translate(centerX, centerY);
         g2d.setColor(Color.WHITE);
         cube.Draw(g2d);
-        g2d.setColor(Color.RED);
-        if (intersection1 != null)
-        {
-            intersection1.Draw(g2d);
-        }
-        g2d.setColor(Color.YELLOW);
-        if (intersection2 != null)
-        {
-            intersection2.Draw(g2d);
-        }
-        g2d.setColor(Color.GREEN);
-        if (intersection3 != null)
-        {
-            intersection3.Draw(g2d);
-        }
         g2d.setColor(Color.BLUE);
-        if (intersection4 != null)
+        for (int i = 0; i <= 20; i++)
         {
-            intersection4.Draw(g2d);
+            g2d.setColor(new Color(Color.HSBtoRGB(((float)i)/20, 1, 1)));
+            Intersection2D intersection = intersections.get(i);
+            if (intersection != null)
+            {
+                intersection.Draw(g2d);
+            }
         }
         
 //        g2d.drawLine(0, 100, increment, 100);
