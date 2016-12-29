@@ -22,6 +22,11 @@ public class App {
     private double z2 = 1.0;
     
     private Cube cube = new Cube(50);
+    private Intersection2D intersection1;
+    private Intersection2D intersection2;
+    private Intersection2D intersection3;
+    private Intersection2D intersection4;
+
     
     private int increment = 0;
     
@@ -87,7 +92,11 @@ public class App {
 //        cube.rotateX(1);
         cube.translate(0, 0, 0.25);
         cube.updateFaces();
-        cube.updateIntersections(150);
+//        cube.updateIntersections(150);
+        intersection1 = cube.getIntersection(145);
+        intersection2 = cube.getIntersection(150);
+        intersection3 = cube.getIntersection(155);
+        intersection4 = cube.getIntersection(160);
     }
     
     /**
@@ -102,8 +111,25 @@ public class App {
         g2d.setColor(Color.WHITE);
         cube.Draw(g2d);
         g2d.setColor(Color.RED);
-        cube.DrawIntersections(g2d);
-
+        if (intersection1 != null)
+        {
+            intersection1.Draw(g2d);
+        }
+        g2d.setColor(Color.YELLOW);
+        if (intersection2 != null)
+        {
+            intersection2.Draw(g2d);
+        }
+        g2d.setColor(Color.GREEN);
+        if (intersection3 != null)
+        {
+            intersection3.Draw(g2d);
+        }
+        g2d.setColor(Color.BLUE);
+        if (intersection4 != null)
+        {
+            intersection4.Draw(g2d);
+        }
         
 //        g2d.drawLine(0, 100, increment, 100);
 ////        g2d.drawOval(-100, -100, 200, 200);

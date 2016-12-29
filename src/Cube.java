@@ -104,6 +104,20 @@ public class Cube
         }
     }
     
+    public Intersection2D getIntersection(double zPlane)
+    {
+        ArrayList<Line> intersection = new ArrayList<Line>();
+        for (Face face : faces)
+        {
+            Line line = face.getIntersection(zPlane);
+            if (line != null)
+            {
+                intersection.add(line);
+            }
+        }
+        return new Intersection2D(intersection);
+    }
+    
     public void updateIntersections(double zPlane)
     {
 //        for (Line edge : edges)

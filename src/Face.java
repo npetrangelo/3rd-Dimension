@@ -29,6 +29,21 @@ public class Face
         return new Face(new ArrayList<CubePoint>(Arrays.asList(pts)));
     }
     
+    public static Face makeFace(ArrayList<Line> lines)
+    {
+        if (lines.isEmpty())
+        {
+            return null;
+        }
+        ArrayList<CubePoint> pts = new ArrayList<CubePoint>();
+        pts.add(lines.get(0).p1);
+        for (Line line : lines)
+        {
+            pts.add(line.p2);
+        }
+        return new Face(pts);
+    }
+    
     public void Draw(Graphics2D g2d)
     {
         for (CubePoint pt : points)
@@ -37,6 +52,10 @@ public class Face
             projection.addPoint(projected.x, projected.y);
         }
         g2d.drawPolygon(projection);
+//        for (Line edge : edges)
+//        {
+//            edge.Draw(g2d);
+//        }
     }
     
     public void updateIntersections(double zPlane)
