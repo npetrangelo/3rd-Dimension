@@ -1,7 +1,11 @@
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
 
 /**
  * Framework that controls the game (Game.java) that created it, update it and draw it on the screen.
@@ -9,16 +13,18 @@ import java.awt.event.MouseEvent;
  * @author www.gametutorial.net
  */
 
-public class Framework extends Canvas {
-    
+public class Framework extends JPanel {
+    private static final long serialVersionUID = 7230961570221429249L;
+
     /**
      * Width of the frame.
      */
-    public static int frameWidth;
+    public static int frameWidth = 1024;
+
     /**
      * Height of the frame.
      */
-    public static int frameHeight;
+    public static int frameHeight = 748;
 
     /**
      * Time of one second in nanoseconds.
@@ -56,7 +62,6 @@ public class Framework extends Canvas {
     public Framework ()
     {
         super();
-                
         //We start game in new thread.
         Thread gameThread = new Thread() {
             @Override
@@ -65,6 +70,11 @@ public class Framework extends Canvas {
             }
         };
         gameThread.start();
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(frameWidth, frameHeight);
     }
     
     
@@ -129,9 +139,9 @@ public class Framework extends Canvas {
      * Draw the game to the screen. It is called through repaint() method in GameLoop() method.
      */
     @Override
-    public void Draw(Graphics2D g2d)
+    public void paintComponent(Graphics g)
     {
-        app.Draw(g2d, mousePosition());
+        app.Draw((Graphics2D) g, mousePosition());
     }
     
     
@@ -183,28 +193,5 @@ public class Framework extends Canvas {
         {
             return new Point(0, 0);
         }
-    }
-    
-    
-    /**
-     * This method is called when keyboard key is released.
-     * 
-     * @param e KeyEvent
-     */
-    @Override
-    public void keyReleasedFramework(KeyEvent e)
-    {
-        
-    }
-    
-    /**
-     * This method is called when mouse button is clicked.
-     * 
-     * @param e MouseEvent
-     */
-    @Override
-    public void mouseClicked(MouseEvent e)
-    {
-        
     }
 }

@@ -66,7 +66,7 @@ public class App {
      */
     public void RestartGame()
     {
-        cube.center();
+        cube.reset();
     }
     
     
@@ -86,9 +86,10 @@ public class App {
 //        y1 = Math.sin(Math.toRadians(increment)) * 50;
 //        y2 = -y1;
 //        cube1.translate(0, 0, 1);
-//        cube.rotateY(1);
+        cube.rotateY(1);
 //        cube.rotateX(1);
-        cube.translate(0, 0, 0.25);
+        cube.setZ(Window.slider.getValue());
+//        cube.translate(0, 0, 1);
         cube.updateFaces();
 //        cube.updateIntersections(150);
         intersections.clear();
@@ -106,6 +107,8 @@ public class App {
      */
     public void Draw(Graphics2D g2d, Point mousePosition)
     {
+        g2d.setColor(Color.BLACK);
+        g2d.fillRect(0, 0, Framework.frameWidth, Framework.frameHeight);
         g2d.translate(centerX, centerY);
         g2d.setColor(Color.WHITE);
         cube.Draw(g2d);

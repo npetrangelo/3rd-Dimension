@@ -17,7 +17,7 @@ public class Cube
     {
         this.length = length;
         center = new CubePoint(0, 0, 0);
-        center();
+        reset();
         
         updateLines();
     }
@@ -34,7 +34,7 @@ public class Cube
         }
     }
     
-    public void center()
+    public void reset()
     {
         center = new CubePoint(0, 0, 100);
         for (int i = 0; i <= 1; i++)
@@ -47,6 +47,27 @@ public class Cube
                 }
             }
         }
+    }
+    
+    public void updateCenter()
+    {
+        double xSum = 0;
+        double ySum = 0;
+        double zSum = 0;
+        
+        for (int i = 0; i <= 1; i++)
+        {
+            for (int j = 0; j <= 1; j++)
+            {
+                for (int k = 0; k <= 1; k++)
+                {
+                    xSum += pts[i][j][k].x;
+                    ySum += pts[i][j][k].y;
+                    zSum += pts[i][j][k].z;
+                }
+            }
+        }
+        center = new CubePoint(xSum/8, ySum/8, zSum/8);
     }
     
     public void updateLines()
@@ -174,8 +195,24 @@ public class Cube
                 }
             }
         }
+        updateCenter();
     }
     
+    public void setZ(double z)
+    {
+        for (int i = 0; i <= 1; i++)
+        {
+            for (int j = 0; j <= 1; j++)
+            {
+                for (int k = 0; k <= 1; k++)
+                {
+                    pts[i][j][k] = new CubePoint(pts[i][j][k].x, pts[i][j][k].y, (pts[i][j][k].z - center.z) + z);
+                }
+            }
+        }
+        updateCenter();
+    }
+
     public void rotateY(double a)
     {
         a *= Math.PI/180;

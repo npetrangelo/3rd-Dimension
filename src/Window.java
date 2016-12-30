@@ -1,4 +1,7 @@
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 
 /**
@@ -9,8 +12,11 @@ import javax.swing.SwingUtilities;
 public class Window extends JFrame
 {
     public static int WIDTH = 1024;
-    public static int HEIGHT = 768;
-        
+    public static int HEIGHT = 850;
+    
+    public static JSlider slider;
+    public JPanel panel;
+                
     private Window()
     {
         // Sets the title for this frame.
@@ -28,18 +34,21 @@ public class Window extends JFrame
         {
             // Size of the frame.
             this.setSize(WIDTH, HEIGHT);
+//            this.pack();
             // Puts frame to center of the screen.
             this.setLocationRelativeTo(null);
             // So that frame cannot be resizable by the user.
-            this.setResizable(false);
+            this.setResizable(true);
         }
         
         // Exit the application when user close frame.
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        panel = new JPanel();
+        slider = new JSlider(100, 500, 150);
+        panel.add(new Framework());
+        panel.add(slider);
         // Creates the instance of the Framework.java that extends the Canvas.java and puts it on the frame.
-//        this.setContentPane(new Framework());
-        this.add(new Framework());
+        this.add(panel);
         
         this.setVisible(true);
     }
