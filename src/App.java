@@ -93,7 +93,7 @@ public class App {
         cube.updateFaces();
 //        cube.updateIntersections(150);
         intersections.clear();
-        for (int i = 190; i >= 150; i--)
+        for (int i = 155; i >= 150; i--)
         {
             intersections.add(cube.getIntersection(i));
         }
@@ -113,9 +113,9 @@ public class App {
         g2d.setColor(Color.WHITE);
         cube.Draw(g2d);
         g2d.setColor(Color.BLUE);
-        for (int i = 0; i <= 40; i++)
+        for (int i = 0; i <= 5; i++)
         {
-            g2d.setColor(new Color(Color.HSBtoRGB(((float)i)/40, 1, 1)));
+            g2d.setColor(new Color(Color.HSBtoRGB(((float)i)/5, 1, 1)));
             Intersection2D intersection = intersections.get(i);
             if (intersection != null)
             {
