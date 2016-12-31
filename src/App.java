@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
@@ -21,6 +22,8 @@ public class App {
     private double y2 = 1.0;
     private double z1 = 1.0;
     private double z2 = 1.0;
+    
+    private Point prevMousePosition;
     
     private Cube cube = new Cube(50);
     private ArrayList<Intersection2D> intersections = new ArrayList<Intersection2D>();
@@ -69,16 +72,13 @@ public class App {
         cube.reset();
     }
     
-    
     /**
      * Update game logic.
      * 
      * @param gameTime gameTime of the game.
-     * @param mousePosition current mouse position.
      */
-    public void UpdateGame(long gameTime, Point mousePosition)
+    public void UpdateGame(long gameTime, Point deltaMousePosition)
     {
-
 //        System.out.println(increment);
 //        increment = ((increment + 1) % 360);
 //        z1 = Math.cos(Math.toRadians(increment)) + 3;
@@ -86,8 +86,10 @@ public class App {
 //        y1 = Math.sin(Math.toRadians(increment)) * 50;
 //        y2 = -y1;
 //        cube1.translate(0, 0, 1);
-        cube.rotateY(1);
+//        cube.rotateY(1);
 //        cube.rotateX(1);
+        cube.rotateY(deltaMousePosition.x);
+        cube.rotateX(deltaMousePosition.y);
         cube.setZ(Window.slider.getValue());
 //        cube.translate(0, 0, 1);
         cube.updateFaces();
@@ -103,9 +105,8 @@ public class App {
      * Draw the game to the screen.
      * 
      * @param g2d Graphics2D
-     * @param mousePosition current mouse position.
      */
-    public void Draw(Graphics2D g2d, Point mousePosition)
+    public void Draw(Graphics2D g2d)
     {
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, Framework.frameWidth, Framework.frameHeight);

@@ -66,12 +66,12 @@ public class Face
             CubePoint intersection = edge.makeIntersection(zPlane);
             if (intersection != null)
             {
-                System.out.println("Face.updateIntersections intersection=" + intersection);
+//                System.out.println("Face.updateIntersections intersection=" + intersection);
                 intersections.add(intersection);
             }
         }
         intersections.sort(CubePoint::compareByX);
-        System.out.println("Face.updateIntersections intersections=" + intersections);
+//        System.out.println("Face.updateIntersections intersections=" + intersections);
     }
     
     public Line getIntersection(double zPlane)
@@ -82,7 +82,7 @@ public class Face
             CubePoint intersection = edge.makeIntersection(zPlane);
             if (intersection != null)
             {
-                System.out.println("Face.getIntersection intersection=" + intersection);
+//                System.out.println("Face.getIntersection intersection=" + intersection);
                 intersections.add(intersection);
             }
         }
@@ -96,7 +96,7 @@ public class Face
     
     public void drawIntersection(Graphics2D g2d)
     {
-        System.out.println(intersections.size());
+//        System.out.println(intersections.size());
         if (!intersections.isEmpty())
         {
             for (int i = 0; i <= intersections.size()-2; i += 2)

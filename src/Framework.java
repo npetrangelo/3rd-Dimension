@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
  * @author www.gametutorial.net
  */
 
-public class Framework extends JPanel {
+public class Framework extends JPanel implements MouseMotionListener {
     private static final long serialVersionUID = 7230961570221429249L;
 
     /**
@@ -48,6 +49,9 @@ public class Framework extends JPanel {
      */
     private final long GAME_UPDATE_PERIOD = secInNanosec / GAME_FPS;
     
+    private Point prevMousePosition;
+    private Point deltaMousePosition;
+    
     /**
      * Elapsed game time in nanoseconds.
      */
@@ -59,9 +63,11 @@ public class Framework extends JPanel {
     private App app;
     
     
-    public Framework ()
+    public Framework()
     {
         super();
+        addMouseMotionListener(this);
+        deltaMousePosition = new Point(0, 0);
         //We start game in new thread.
         Thread gameThread = new Thread() {
             @Override
@@ -113,9 +119,11 @@ public class Framework extends JPanel {
             System.out.println("----- Main loop -----");
             gameTime += System.nanoTime() - lastTime;
             
-            app.UpdateGame(gameTime, mousePosition());
+            app.UpdateGame(gameTime, deltaMousePosition);
             
             lastTime = System.nanoTime();
+            
+            deltaMousePosition = new Point(0, 0);
             
             beginTime = System.nanoTime();
             
@@ -141,7 +149,7 @@ public class Framework extends JPanel {
     @Override
     public void paintComponent(Graphics g)
     {
-        app.Draw((Graphics2D) g, mousePosition());
+        app.Draw((Graphics2D) g);
     }
     
     
@@ -172,26 +180,47 @@ public class Framework extends JPanel {
     }
     
     
-    /**
-     * Returns the position of the mouse pointer in game frame/window.
-     * If mouse position is null than this method return 0,0 coordinate.
-     * 
-     * @return Point of mouse coordinates.
-     */
-    private Point mousePosition()
+//    /**
+//     * Returns the position of the mouse pointer in game frame/window.
+//     * If mouse position is null than this method return 0,0 coordinate.
+//     * 
+//     * @return Point of mouse coordinates.
+//     */
+//    private Point mousePosition()
+//    {
+//        try
+//        {
+//            Point mp = this.getMousePosition();
+//            
+//            if(mp != null)
+//                return this.getMousePosition();
+//            else
+//                return new Point(0, 0);
+//        }
+//        catch (Exception e)
+//        {
+//            return new Point(0, 0);
+//        }
+//    }
+
+    @Override
+    public void mouseDragged(MouseEvent e)
     {
-        try
+        System.out.println(e.getPoint());
+        if (e.isShiftDown())
         {
-            Point mp = this.getMousePosition();
-            
-            if(mp != null)
-                return this.getMousePosition();
-            else
-                return new Point(0, 0);
+            deltaMousePosition = new Point(-(e.getX() - prevMousePosition.x)/2, (e.getY() - prevMousePosition.y)/2);
         }
-        catch (Exception e)
+        else
         {
-            return new Point(0, 0);
+            deltaMousePosition = new Point(-(e.getX() - prevMousePosition.x), (e.getY() - prevMousePosition.y));
         }
+        prevMousePosition = e.getPoint();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e)
+    {
+        prevMousePosition = e.getPoint();
     }
 }
