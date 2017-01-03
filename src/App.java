@@ -26,9 +26,10 @@ public class App {
     private Point prevMousePosition;
     
     private Cube cube = new Cube(50);
-    private ArrayList<Intersection2D> intersections = new ArrayList<Intersection2D>();
+    private Intersection2D intersection;
     
     Window window;
+    private static App instance;
     
     private int increment = 0;
     
@@ -46,6 +47,12 @@ public class App {
         threadForInitGame.start();
         window = Window.getInstance();
         System.out.println("Just got instance: " + window);
+        instance = this;
+    }
+    
+    public static App getInstance()
+    {
+        return instance;
     }
     
     
@@ -97,11 +104,7 @@ public class App {
 //        cube.translate(0, 0, 1);
         cube.updateFaces();
 //        cube.updateIntersections(150);
-        intersections.clear();
-        for (int i = 155; i >= 150; i--)
-        {
-            intersections.add(cube.getIntersection(i));
-        }
+        intersection = cube.getIntersection(150);
     }
     
     /**
@@ -116,70 +119,27 @@ public class App {
         g2d.translate(centerX, centerY);
         g2d.setColor(Color.WHITE);
         cube.Draw(g2d);
-        g2d.setColor(Color.BLUE);
-        for (int i = 0; i <= 5; i++)
+        g2d.setColor(Color.RED);
+        if (intersection != null)
         {
-            g2d.setColor(new Color(Color.HSBtoRGB(((float)i)/5, 1, 1)));
-            Intersection2D intersection = intersections.get(i);
-            if (intersection != null)
-            {
-                intersection.Draw(g2d);
-            }
+            intersection.Draw(g2d);
         }
-        
-//        g2d.drawLine(0, 100, increment, 100);
-////        g2d.drawOval(-100, -100, 200, 200);
-//        draw3dLine(g2d, width/2, 0, 3, -width/2, 0, 3);
-//        draw3dLine(g2d, 0, y1, z1, 0, y2, z2);
-//        draw3dLine(g2d, width/4, y1, z1, width/4, y2, z2);
-//        draw3dLine(g2d, -width/4, y1, z1, -width/4, y2, z2);
-//        draw3dLine(g2d, width/8, y1, z1, width/8, y2, z2);
-//        draw3dLine(g2d, -width/8, y1, z1, -width/8, y2, z2);
-//        draw3dLine(g2d, 3*width/8, y1, z1, 3*width/8, y2, z2);
-//        draw3dLine(g2d, 3*-width/8, y1, z1, 3*-width/8, y2, z2);
-//        
-//        draw3dLine(g2d, width/2, y2, z2, width/2, y1, z1);
-//        draw3dLine(g2d, -width/2, y1, z1, -width/2, y2, z2);
-//        draw3dLine(g2d, -width/2, y1, z1, width/2, y1, z1);
-//        draw3dLine(g2d, width/2, y2, z2, -width/2, y2, z2);
-//        draw3dGrid(g2d, width, height, 5, 5, increment);
     }
     
-//    public void draw3dLine(Graphics2D g2d, double x1, double y1, double z1, double x2, double y2, double z2)
-//    {
-//        g2d.drawLine((int)(x1/z1), (int)(y1/z1), (int)(x2/z2), (int)(y2/z2));
-//    }
+    public void faceFirst()
+    {
+        cube.reset();
+    }
     
-//    public void drawOrthagLine(Graphics2D g2d, double x1, double y1, double z1, double x2, double y2, double z2)
-//    {
-//        g2d.drawLine((int)(x1), (int)(y1), (int)(x2), (int)(y2));
-//    }
+    public void edgeFirst()
+    {
+        faceFirst();
+        cube.rotateY(45);
+    }
     
-//    /**
-//     * 
-//     * @param g2d The graphics object to draw with
-//     * @param width Width of graph in pixels
-//     * @param height Height of graph in pixels
-//     * @param rows Number of rows in graph
-//     * @param columns Number of Columns in graph
-//     * @param angleX Angle rotated around X axis; 0 = horizontal
-//     */
-//    public void draw3dGrid(Graphics2D g2d, int width, int height, int rows, int columns, int angleX)
-//    {
-//        double z1 = Math.cos(Math.toRadians(angleX)) + 3;
-//        double z2 = Math.cos(Math.toRadians(angleX + 180)) + 3;
-//        
-//        double y = Math.sin(Math.toRadians(angleX)) * height;
-//        System.out.println("z=" + z1);
-//        
-//        for (int row = -height/2; row <= height/2; row += height/rows)
-//        {
-//            draw3dLine(g2d, width/2, y*row, z1*row, -width/2, y*row, z1*row);
-//        }
-//        drawOrthagLine(g2d, width/2, y*height/2, z1*height/2, -width/2, y*height/2, z1*height/2);
-//        for (int column = -width/2; column <= width/2; column += width/columns)
-//        {
-//            draw3dLine(g2d, column, y, z1, column, -y, z2);
-//        }
-//    }
+    public void vertexFirst()
+    {
+        edgeFirst();
+        cube.rotateX(35);
+    }
 }

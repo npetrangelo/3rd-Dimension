@@ -121,14 +121,14 @@ public class Framework extends JPanel implements MouseMotionListener {
         long beginTime, timeTaken, timeLeft;
 
         newGame();
-        System.out.println("GameLoop After newGame app.window=" + app.window);
+//        System.out.println("GameLoop After newGame app.window=" + app.window);
         isInitialized = true;
         while(true)
         {
-            System.out.println("----- Main loop -----");
+//            System.out.println("----- Main loop -----");
             gameTime += System.nanoTime() - lastTime;
             
-            System.out.println("GameLoop Before UpdateGame app.window=" + app.window);
+//            System.out.println("GameLoop Before UpdateGame app.window=" + app.window);
             app.UpdateGame(gameTime, deltaMousePosition);
             
             lastTime = System.nanoTime();

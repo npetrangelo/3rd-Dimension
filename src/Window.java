@@ -1,4 +1,8 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -9,16 +13,22 @@ import javax.swing.SwingUtilities;
  * 
  * @author www.gametutorial.net
  */
-public class Window extends JFrame
+public class Window extends JFrame implements ActionListener
 {
     public static int WIDTH = 1024;
     public static int HEIGHT = 850;
     
-    public JSlider slider;
+    private JSlider slider;
     
-    public JPanel mainPanel;
-    public JPanel UIPanel;
+    private JPanel mainPanel;
+    private JPanel UIPanel;
+    
+    private JButton vertex;
+    private JButton edge;
+    private JButton face;
+    
     private static Window instance;
+    private App app;
                 
     private Window()
     {
@@ -50,7 +60,20 @@ public class Window extends JFrame
         mainPanel = new JPanel();
         UIPanel = new JPanel();
         
-        slider = new JSlider(100, 500, 150);
+        slider = new JSlider(100, 200, 150);
+        
+        face = new JButton("Face");
+        face.addActionListener(this);
+        UIPanel.add(face);
+        
+        edge = new JButton("Edge");
+        edge.addActionListener(this);
+        UIPanel.add(edge);
+        
+        vertex = new JButton("Vertex");
+        vertex.addActionListener(this);
+        UIPanel.add(vertex);
+        
         UIPanel.add(slider);
         Framework framework = new Framework();
         mainPanel.add(framework);
@@ -82,6 +105,24 @@ public class Window extends JFrame
                 new Window();
             }
         });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        app = App.getInstance();
+        if (e.getSource() == face)
+        {
+            app.faceFirst();
+        }
+        if (e.getSource() == edge)
+        {
+            app.edgeFirst();
+        }
+        if (e.getSource() == vertex)
+        {
+            app.vertexFirst();
+        }
     }
 }
 
