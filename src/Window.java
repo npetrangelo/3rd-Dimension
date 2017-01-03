@@ -14,8 +14,11 @@ public class Window extends JFrame
     public static int WIDTH = 1024;
     public static int HEIGHT = 850;
     
-    public static JSlider slider;
-    public JPanel panel;
+    public JSlider slider;
+    
+    public JPanel mainPanel;
+    public JPanel UIPanel;
+    private static Window instance;
                 
     private Window()
     {
@@ -43,14 +46,31 @@ public class Window extends JFrame
         
         // Exit the application when user close frame.
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel = new JPanel();
+        
+        mainPanel = new JPanel();
+        UIPanel = new JPanel();
+        
         slider = new JSlider(100, 500, 150);
-        panel.add(new Framework());
-        panel.add(slider);
+        UIPanel.add(slider);
+        Framework framework = new Framework();
+        mainPanel.add(framework);
+        mainPanel.add(UIPanel);
         // Creates the instance of the Framework.java that extends the Canvas.java and puts it on the frame.
-        this.add(panel);
+        this.add(mainPanel);
         
         this.setVisible(true);
+        instance = this;
+        framework.startGameLoop();
+    }
+    
+    public static Window getInstance()
+    {
+        return instance;
+    }
+    
+    public int getSliderValue()
+    {
+        return slider.getValue();
     }
 
     public static void main(String[] args)

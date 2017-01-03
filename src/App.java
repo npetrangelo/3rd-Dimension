@@ -27,7 +27,8 @@ public class App {
     
     private Cube cube = new Cube(50);
     private ArrayList<Intersection2D> intersections = new ArrayList<Intersection2D>();
-
+    
+    Window window;
     
     private int increment = 0;
     
@@ -43,6 +44,8 @@ public class App {
             }
         };
         threadForInitGame.start();
+        window = Window.getInstance();
+        System.out.println("Just got instance: " + window);
     }
     
     
@@ -90,7 +93,7 @@ public class App {
 //        cube.rotateX(1);
         cube.rotateY(deltaMousePosition.x);
         cube.rotateX(deltaMousePosition.y);
-        cube.setZ(Window.slider.getValue());
+        cube.setZ(window.getSliderValue());
 //        cube.translate(0, 0, 1);
         cube.updateFaces();
 //        cube.updateIntersections(150);

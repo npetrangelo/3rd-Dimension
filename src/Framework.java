@@ -52,6 +52,8 @@ public class Framework extends JPanel implements MouseMotionListener {
     private Point prevMousePosition;
     private Point deltaMousePosition;
     
+    private boolean isInitialized = false;
+    
     /**
      * Elapsed game time in nanoseconds.
      */
@@ -68,6 +70,10 @@ public class Framework extends JPanel implements MouseMotionListener {
         super();
         addMouseMotionListener(this);
         deltaMousePosition = new Point(0, 0);
+    }
+
+    void startGameLoop()
+    {
         //We start game in new thread.
         Thread gameThread = new Thread() {
             @Override
@@ -109,16 +115,20 @@ public class Framework extends JPanel implements MouseMotionListener {
     private void GameLoop()
     {
         // This two variables are used in VISUALIZING state of the game. We used them to wait some time so that we get correct frame/window resolution.
-        long visualizingTime = 0, lastVisualizingTime = System.nanoTime();
+//        long visualizingTime = 0, lastVisualizingTime = System.nanoTime();
         
         // This variables are used for calculating the time that defines for how long we should put threat to sleep to meet the GAME_FPS.
         long beginTime, timeTaken, timeLeft;
+
         newGame();
+        System.out.println("GameLoop After newGame app.window=" + app.window);
+        isInitialized = true;
         while(true)
         {
             System.out.println("----- Main loop -----");
             gameTime += System.nanoTime() - lastTime;
             
+            System.out.println("GameLoop Before UpdateGame app.window=" + app.window);
             app.UpdateGame(gameTime, deltaMousePosition);
             
             lastTime = System.nanoTime();
@@ -149,7 +159,10 @@ public class Framework extends JPanel implements MouseMotionListener {
     @Override
     public void paintComponent(Graphics g)
     {
-        app.Draw((Graphics2D) g);
+        if (isInitialized)
+        {
+            app.Draw((Graphics2D) g);
+        }
     }
     
     
