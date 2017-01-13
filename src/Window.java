@@ -1,4 +1,5 @@
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -75,8 +76,11 @@ public class Window extends JFrame implements ActionListener
         UIPanel.add(vertex);
         
         UIPanel.add(slider);
-//        Framework framework = new Framework(new PerspectiveProjector());
-        Framework framework = new Framework(new CameraOrthographic());
+//        Framework framework = new Framework(new CameraPerspective());
+//        Framework framework = new Framework(new CameraOrthographic());
+        Framework framework = new Framework((CubePoint point) -> {
+           return new Point((int) (500 * point.x/(point.y - 200)), (int)(500 * (point.z - 200)/(point.y - 200))); 
+        });
         mainPanel.add(framework);
         mainPanel.add(UIPanel);
         // Creates the instance of the Framework.java that extends the Canvas.java and puts it on the frame.
