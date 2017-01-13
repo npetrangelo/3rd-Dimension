@@ -75,7 +75,8 @@ public class Window extends JFrame implements ActionListener
         UIPanel.add(vertex);
         
         UIPanel.add(slider);
-        Framework framework = new Framework();
+//        Framework framework = new Framework(new PerspectiveProjector());
+        Framework framework = new Framework(new CameraOrthographic());
         mainPanel.add(framework);
         mainPanel.add(UIPanel);
         // Creates the instance of the Framework.java that extends the Canvas.java and puts it on the frame.

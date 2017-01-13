@@ -52,6 +52,8 @@ public class Framework extends JPanel implements MouseMotionListener {
     private Point prevMousePosition;
     private Point deltaMousePosition;
     
+    private Camera projector;
+    
     private boolean isInitialized = false;
     
     /**
@@ -65,9 +67,10 @@ public class Framework extends JPanel implements MouseMotionListener {
     private App app;
     
     
-    public Framework()
+    public Framework(Camera p)
     {
         super();
+        projector = p;
         addMouseMotionListener(this);
         deltaMousePosition = new Point(0, 0);
     }
@@ -161,7 +164,7 @@ public class Framework extends JPanel implements MouseMotionListener {
     {
         if (isInitialized)
         {
-            app.Draw((Graphics2D) g);
+            app.Draw((Graphics2D) g, projector);
         }
     }
     

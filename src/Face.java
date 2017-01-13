@@ -44,11 +44,11 @@ public class Face
         return new Face(pts);
     }
     
-    public void Draw(Graphics2D g2d)
+    public void Draw(Graphics2D g2d, Camera p)
     {
         for (CubePoint pt : points)
         {
-            Point projected = pt.project();
+            Point projected = p.project(pt);
             projection.addPoint(projected.x, projected.y);
         }
         g2d.drawPolygon(projection);
@@ -94,7 +94,7 @@ public class Face
         return new Line(intersections.get(0), intersections.get(1));
     }
     
-    public void drawIntersection(Graphics2D g2d)
+    public void drawIntersection(Graphics2D g2d, Camera p)
     {
 //        System.out.println(intersections.size());
         if (!intersections.isEmpty())
@@ -102,7 +102,7 @@ public class Face
             for (int i = 0; i <= intersections.size()-2; i += 2)
             {
                 Line intersection = new Line(intersections.get(i), intersections.get(i+1));
-                intersection.Draw(g2d);
+                intersection.Draw(g2d, p);
             }
         }
     }

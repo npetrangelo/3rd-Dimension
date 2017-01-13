@@ -17,11 +17,6 @@ public class CubePoint
         return new CubePoint(coords[0], coords[1], coords[2]);
     }
     
-    public Point project()
-    {
-        return new Point((int) (App.focalLength * x/z), (int) (App.focalLength * y/z));
-    }
-    
     public void translate(double dx, double dy, double dz)
     {
         x += dx;
@@ -29,9 +24,9 @@ public class CubePoint
         z += dz;
     }
     
-    public void Draw(Graphics2D g2d)
+    public void Draw(Graphics2D g2d, Camera p)
     {
-        Point ppt =  project();
+        Point ppt =  p.project(this);
         g2d.fillOval(ppt.x - 4, ppt.y - 4, 8, 8);
     }
     

@@ -26,11 +26,11 @@ public class Cube
      * Make sure you update before drawing!
      * @param g2d
      */
-    public void Draw(Graphics2D g2d)
+    public void Draw(Graphics2D g2d, Camera p)
     {
         for (Face face : faces)
         {
-            face.Draw(g2d);
+            face.Draw(g2d, p);
         }
     }
     
@@ -161,14 +161,14 @@ public class Cube
         }
     }
     
-    public void DrawIntersections(Graphics2D g2d)
+    public void DrawIntersections(Graphics2D g2d, Camera p)
     {
         if (!intersections.isEmpty())
         {
             System.out.println(intersections);
             for (Line intersection : intersections)
             {
-                intersection.Draw(g2d);
+                intersection.Draw(g2d, p);
             }
         }
     }

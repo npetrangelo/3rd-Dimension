@@ -11,12 +11,12 @@ public class Line
         this.p2 = p2;
     }
     
-    public void Draw(Graphics2D g2d)
+    public void Draw(Graphics2D g2d, Camera p)
     {
-        Point pt1 = p1.project();
-        Point pt2 = p2.project();
-        p1.Draw(g2d);
-        p2.Draw(g2d);
+        Point pt1 = p.project(p1);
+        Point pt2 = p.project(p2);
+        p1.Draw(g2d, p);
+        p2.Draw(g2d, p);
         g2d.drawLine(pt1.x, pt1.y, pt2.x, pt2.y);
     }
     
