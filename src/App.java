@@ -104,7 +104,7 @@ public class App {
 //        cube.translate(0, 0, 1);
         cube.updateFaces();
 //        cube.updateIntersections(150);
-        intersection = cube.getIntersection(150);
+        intersection = cube.getIntersection(0.0);
     }
     
     /**

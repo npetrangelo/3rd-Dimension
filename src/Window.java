@@ -61,7 +61,7 @@ public class Window extends JFrame implements ActionListener
         mainPanel = new JPanel();
         UIPanel = new JPanel();
         
-        slider = new JSlider(100, 200, 150);
+        slider = new JSlider(-50, 50, 0);
         
         face = new JButton("Face");
         face.addActionListener(this);

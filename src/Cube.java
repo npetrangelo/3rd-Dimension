@@ -36,14 +36,14 @@ public class Cube
     
     public void reset()
     {
-        center = new CubePoint(0, 0, 100);
+        center = new CubePoint(0, 0, 0);
         for (int i = 0; i <= 1; i++)
         {
             for (int j = 0; j <= 1; j++)
             {
                 for (int k = 0; k <= 1; k++)
                 {
-                    pts[i][j][k] = new CubePoint(i*length - length/2, j*length - length/2, k*length - length/2 + 100);
+                    pts[i][j][k] = new CubePoint(i*length - length/2, j*length - length/2, k*length - length/2);
                 }
             }
         }
