@@ -215,20 +215,13 @@ public class Cube
 
     public void rotateY(double a)
     {
-        a *= Math.PI/180;
-        double[][] matrix = {
-                {Math.cos(a),  0.0, Math.sin(a)},
-                {0.0,          1.0, 0.0},
-                {-Math.sin(a), 0.0, Math.cos(a)}
-        };
         for (int i = 0; i <= 1; i++)
         {
             for (int j = 0; j <= 1; j++)
             {
                 for (int k = 0; k <= 1; k++)
-                {   
-                    double[] pt = matrixMultiply(new CubePoint(pts[i][j][k].x - center.x, pts[i][j][k].y - center.y, pts[i][j][k].z - center.z), matrix);
-                    pts[i][j][k] = CubePoint.makePoint(new double[] {pt[0] + center.x, pt[1] + center.y, pt[2] + center.z});
+                {
+                    pts[i][j][k].rotateY(a, center);
                 }
             }
         }
@@ -236,39 +229,15 @@ public class Cube
     
     public void rotateX(double a)
     {
-        a *= Math.PI/180;
-        double[][] matrix = {
-                {1.0, 0.0,          0.0},
-                {0.0, Math.cos(a), -Math.sin(a)},
-                {0.0, Math.sin(a),  Math.cos(a)}
-        };
         for (int i = 0; i <= 1; i++)
         {
             for (int j = 0; j <= 1; j++)
             {
                 for (int k = 0; k <= 1; k++)
-                {   
-                    double[] pt = matrixMultiply(new CubePoint(pts[i][j][k].x - center.x, pts[i][j][k].y - center.y, pts[i][j][k].z - center.z), matrix);
-                    pts[i][j][k] = CubePoint.makePoint(new double[] {pt[0] + center.x, pt[1] + center.y, pt[2] + center.z});
+                {
+                    pts[i][j][k].rotateX(a, center);
                 }
             }
         }
-    }
-    
-    public double[] matrixMultiply(CubePoint p1, double[][] matrix)
-    {
-        double[] pt = {0.0, 0.0, 0.0};
-        
-        if (matrix[0].length != 3)
-        {
-            throw new IllegalArgumentException("Matrix was not 3 columns wide.");
-        }
-        
-        for (int i = 0; i < 3; i++) { // matrix row
-            for (int j = 0; j < 3; j++) { // matrix column and coordinate
-                pt[i] += p1.getMatrix()[j] * matrix[i][j];
-            }
-        }
-        return pt;
     }
 }

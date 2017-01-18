@@ -2,10 +2,10 @@ import java.awt.Point;
 
 public class CameraOrthographic implements Camera
 {
-    public static int zoom = 3;
-    public double x = 0.0;
-    public double y = 0.0;
-    public double z = -150.0;
+    private static int zoom = 3;
+    private double x = 0.0;
+    private double y = 0.0;
+    private double z = -150.0;
     
     @Override
     public Point project(CubePoint pt)

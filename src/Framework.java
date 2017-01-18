@@ -225,7 +225,9 @@ public class Framework extends JPanel implements MouseMotionListener {
         System.out.println(e.getPoint());
         if (e.isShiftDown())
         {
-            deltaMousePosition = new Point(-(e.getX() - prevMousePosition.x)/2, (e.getY() - prevMousePosition.y)/2);
+            deltaMousePosition = new Point(-(e.getX() - prevMousePosition.x), (e.getY() - prevMousePosition.y));
+//            projector.
+            deltaMousePosition = new Point(0, 0);
         }
         else
         {
