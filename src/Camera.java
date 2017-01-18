@@ -26,10 +26,23 @@ public abstract class Camera
         phi += dPhi;
     }
     
+    public void setRotation(double theta, double phi)
+    {
+        this.theta = theta;
+        this.phi = phi;
+    }
+    
     public void translate(double dx, double dy, double dz)
     {
         x += dx;
         y += dy;
         z += dz;
+    }
+    
+    public void setPosition(double x, double y, double z)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 }

@@ -23,16 +23,25 @@ public class Window extends JFrame implements ActionListener
     
     private JPanel mainPanel;
     private JPanel UIPanel;
+    private JPanel cubePanel;
+    private JPanel camPanel;
     
     private JButton vertex;
     private JButton edge;
     private JButton face;
+    private JButton top;
+    private JButton front;
     
     private static Window instance;
     private App app;
+    Camera cam;
+    Framework framework;
                 
     private Window()
     {
+        cam = new CameraPerspective();
+//        Camera cam = new CameraOrthographic();
+        
         // Sets the title for this frame.
         this.setTitle("4D Transformation");
         
@@ -60,24 +69,37 @@ public class Window extends JFrame implements ActionListener
         
         mainPanel = new JPanel();
         UIPanel = new JPanel();
+        cubePanel = new JPanel();
+        camPanel = new JPanel();
         
         slider = new JSlider(-50, 50, 0);
         
         face = new JButton("Face");
         face.addActionListener(this);
-        UIPanel.add(face);
+        cubePanel.add(face);
         
         edge = new JButton("Edge");
         edge.addActionListener(this);
-        UIPanel.add(edge);
+        cubePanel.add(edge);
         
         vertex = new JButton("Vertex");
         vertex.addActionListener(this);
-        UIPanel.add(vertex);
+        cubePanel.add(vertex);
         
-        UIPanel.add(slider);
-        Framework framework = new Framework(new CameraPerspective());
-//        Framework framework = new Framework(new CameraOrthographic());
+        cubePanel.add(slider);
+        framework = new Framework(cam);
+        
+        UIPanel.add(cubePanel);
+        
+        top = new JButton("Top");
+        top.addActionListener(this);
+        camPanel.add(top);
+        
+        front = new JButton("Front");
+        front.addActionListener(this);
+        camPanel.add(front);
+        
+        UIPanel.add(camPanel);
         
         mainPanel.add(framework);
         mainPanel.add(UIPanel);
@@ -125,6 +147,14 @@ public class Window extends JFrame implements ActionListener
         if (e.getSource() == vertex)
         {
             app.vertexFirst();
+        }
+        if (e.getSource() == top)
+        {
+            cam.setRotation(0, 0);
+        }
+        if (e.getSource() == front)
+        {
+            cam.setRotation(0, -80);
         }
     }
 }
