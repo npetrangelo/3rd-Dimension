@@ -29,20 +29,25 @@ public class Face
         return new Face(new ArrayList<CubePoint>(Arrays.asList(pts)));
     }
     
-    public static Face makeFace(ArrayList<Line> lines)
-    {
-        if (lines.isEmpty())
-        {
-            return null;
-        }
-        ArrayList<CubePoint> pts = new ArrayList<CubePoint>();
-        pts.add(lines.get(0).p1);
-        for (Line line : lines)
-        {
-            pts.add(line.p2);
-        }
-        return new Face(pts);
-    }
+//    /**
+//     * Makes a face using the lines as edges, assuming each pair shares a common point
+//     * @param lines ArrayList of lines
+//     * @return A face using the lines as edges
+//     */
+//    public static Face makeFace(ArrayList<Line> lines)
+//    {
+//        if (lines.isEmpty())
+//        {
+//            return null;
+//        }
+//        ArrayList<CubePoint> pts = new ArrayList<CubePoint>();
+//        pts.add(lines.get(0).p1);
+//        for (Line line : lines)
+//        {
+//            pts.add(line.p2);
+//        }
+//        return new Face(pts);
+//    }
     
     public void Draw(Graphics2D g2d, Camera p)
     {
