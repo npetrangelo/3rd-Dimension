@@ -69,6 +69,23 @@ public class CubePoint
         z = rotation[2] + axis.z;
     }
     
+    public void rotateZ(double a, CubePoint axis)
+    {
+        a *= Math.PI/180;
+        double[][] matrix = {
+        		{Math.cos(a), -Math.sin(a),0.0},
+                {Math.sin(a), Math.cos(a), 0.0},
+                {0.0,         0.0,         1.0}
+        };
+        x -= axis.x;
+        y -= axis.y;
+        z -= axis.z;
+        double[] rotation = matrixMultiply(matrix);
+        x = rotation[0] + axis.x;
+        y = rotation[1] + axis.y;
+        z = rotation[2] + axis.z;
+    }
+    
     public double[] matrixMultiply(double[][] matrix)
     {
         double[] pt = {0.0, 0.0, 0.0};

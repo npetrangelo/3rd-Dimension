@@ -98,7 +98,7 @@ public class App {
 //        cube1.translate(0, 0, 1);
 //        cube.rotateY(1);
 //        cube.rotateX(1);
-        cube.rotateY(deltaMousePosition.x);
+        cube.rotateZ(deltaMousePosition.x);
         cube.rotateX(deltaMousePosition.y);
         cube.setZ(window.getSliderValue());
 //        cube.translate(0, 0, 1);

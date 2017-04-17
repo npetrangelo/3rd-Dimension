@@ -240,4 +240,18 @@ public class Cube
             }
         }
     }
+    
+    public void rotateZ(double a)
+    {
+        for (int i = 0; i <= 1; i++)
+        {
+            for (int j = 0; j <= 1; j++)
+            {
+                for (int k = 0; k <= 1; k++)
+                {
+                    pts[i][j][k].rotateZ(a, center);
+                }
+            }
+        }
+    }
 }
