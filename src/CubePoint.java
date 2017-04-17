@@ -101,4 +101,26 @@ public class CubePoint
             return 0;
         }
     }
+    
+    public int compareByY(CubePoint that)
+    {
+        if (this.y < that.y) {
+            return -1;
+        } else if (this.y > that.y) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    
+    public int compareByZ(CubePoint that)
+    {
+        if (this.z < that.z) {
+            return -1;
+        } else if (this.z > that.z) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
