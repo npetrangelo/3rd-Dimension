@@ -226,7 +226,7 @@ public class Framework extends JPanel implements MouseMotionListener {
         if (e.isShiftDown())
         {
             deltaMousePosition = new Point(-(e.getX() - prevMousePosition.x), (e.getY() - prevMousePosition.y));
-            camera.rotate(deltaMousePosition.x, deltaMousePosition.y);
+            camera.rotate(deltaMousePosition.y);
             deltaMousePosition = new Point(0, 0);
         }
         else

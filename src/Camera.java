@@ -5,7 +5,6 @@ public abstract class Camera
     private double x = 0.0;
     private double y = 0.0;
     private double z = -150.0;
-    private double theta = 0.0;
     private double phi = 0.0;
     
     public abstract Point project(CubePoint point);
@@ -14,21 +13,18 @@ public abstract class Camera
     {
         CubePoint image = new CubePoint(point.x, point.y, point.z);
         CubePoint axis = new CubePoint(0.0, 0.0, 0.0);
-        image.rotateY(theta, axis);
         image.rotateX(phi, axis);
         image.translate(-x, -y, -z);
         return image;
     }
     
-    public void rotate(double dTheta, double dPhi)
+    public void rotate(double dPhi)
     {
-        theta += dTheta;
         phi += dPhi;
     }
     
-    public void setRotation(double theta, double phi)
+    public void setRotation(double phi)
     {
-        this.theta = theta;
         this.phi = phi;
     }
     

@@ -150,11 +150,11 @@ public class Window extends JFrame implements ActionListener
         }
         if (e.getSource() == top)
         {
-            cam.setRotation(0, 0);
+            cam.setRotation(0);
         }
         if (e.getSource() == front)
         {
-            cam.setRotation(0, -80);
+            cam.setRotation(-80);
         }
     }
 }
