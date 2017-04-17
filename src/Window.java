@@ -40,10 +40,10 @@ public class Window extends JFrame implements ActionListener
     private Window()
     {
         cam = new CameraPerspective();
-//        Camera cam = new CameraOrthographic();
+//        cam = new CameraOrthographic();
         
         // Sets the title for this frame.
-        this.setTitle("4D Transformation");
+        this.setTitle("3D Transformation");
         
         // Sets size of the frame.
         if(false) // Full screen mode
