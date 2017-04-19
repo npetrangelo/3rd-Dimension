@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Point;
 
 public abstract class Camera
@@ -8,6 +9,8 @@ public abstract class Camera
     private double phi = 0.0;
     
     public abstract Point project(CubePoint point);
+    public abstract Color getCubeColor();
+    public abstract Color getIntersectionColor();
     
     public CubePoint transform(CubePoint point)
     {

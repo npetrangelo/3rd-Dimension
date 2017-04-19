@@ -112,17 +112,17 @@ public class App {
      * 
      * @param g2d Graphics2D
      */
-    public void Draw(Graphics2D g2d, Camera projector)
+    public void Draw(Graphics2D g2d, Camera camera)
     {
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, Framework.frameWidth, Framework.frameHeight);
         g2d.translate(centerX, centerY);
-        g2d.setColor(Color.WHITE);
-        cube.Draw(g2d, projector);
-        g2d.setColor(Color.RED);
+        g2d.setColor(camera.getCubeColor());
+        cube.Draw(g2d, camera);
+        g2d.setColor(camera.getIntersectionColor());
         if (intersection != null)
         {
-            intersection.Draw(g2d, projector);
+            intersection.Draw(g2d, camera);
         }
     }
     

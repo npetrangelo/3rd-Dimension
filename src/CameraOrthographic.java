@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Point;
 
 public class CameraOrthographic extends Camera
@@ -10,5 +11,15 @@ public class CameraOrthographic extends Camera
         CubePoint image = transform(pt);
         return new Point((int) (image.x * zoom), (int) (image.y * zoom));
     }
+
+	@Override
+	public Color getCubeColor() {
+		return Color.RED;
+	}
+
+	@Override
+	public Color getIntersectionColor() {
+		return Color.ORANGE;
+	}
 
 }

@@ -67,10 +67,10 @@ public class Framework extends JPanel implements MouseMotionListener {
     private App app;
     
     
-    public Framework(Camera p)
+    public Framework(Camera cam)
     {
         super();
-        camera = p;
+        camera = cam;
         addMouseMotionListener(this);
         deltaMousePosition = new Point(0, 0);
     }
