@@ -100,7 +100,7 @@ public class App {
 //        cube.rotateX(1);
         cube.rotateZ(deltaMousePosition.x);
         cube.rotateX(deltaMousePosition.y);
-        cube.setZ(window.getSliderValue());
+        cube.setZ(window.getZValue());
 //        cube.translate(0, 0, 1);
         cube.updateFaces();
 //        cube.updateIntersections(150);
@@ -114,6 +114,7 @@ public class App {
      */
     public void Draw(Graphics2D g2d, Camera camera)
     {
+    	((CameraPerspective) camera).setPerspValue(window.getCamValue());
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, Framework.frameWidth, Framework.frameHeight);
         g2d.translate(centerX, centerY);

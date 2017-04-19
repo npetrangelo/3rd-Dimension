@@ -19,7 +19,8 @@ public class Window extends JFrame implements ActionListener
     public static int WIDTH = 1024;
     public static int HEIGHT = 850;
     
-    private JSlider slider;
+    private JSlider zSlider;
+    private JSlider camSlider;
     
     private JPanel mainPanel;
     private JPanel UIPanel;
@@ -72,7 +73,8 @@ public class Window extends JFrame implements ActionListener
         cubePanel = new JPanel();
         camPanel = new JPanel();
         
-        slider = new JSlider(-50, 50, 0);
+        zSlider = new JSlider(-50, 50, 0);
+        camSlider = new JSlider(0, 100, 100);
         
         face = new JButton("Face");
         face.addActionListener(this);
@@ -86,7 +88,7 @@ public class Window extends JFrame implements ActionListener
         vertex.addActionListener(this);
         cubePanel.add(vertex);
         
-        cubePanel.add(slider);
+        cubePanel.add(zSlider);
         framework = new Framework(cam);
         
         UIPanel.add(cubePanel);
@@ -98,6 +100,8 @@ public class Window extends JFrame implements ActionListener
         front = new JButton("Front");
         front.addActionListener(this);
         camPanel.add(front);
+        
+        camPanel.add(camSlider);
         
         UIPanel.add(camPanel);
         
@@ -116,9 +120,14 @@ public class Window extends JFrame implements ActionListener
         return instance;
     }
     
-    public int getSliderValue()
+    public int getZValue()
     {
-        return slider.getValue();
+        return zSlider.getValue();
+    }
+    
+    public double getCamValue()
+    {
+        return camSlider.getValue() / 100.0;
     }
 
     public static void main(String[] args)
