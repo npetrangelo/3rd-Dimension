@@ -2,9 +2,11 @@
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
@@ -19,7 +21,10 @@ public class Window extends JFrame implements ActionListener
     public static int WIDTH = 1024;
     public static int HEIGHT = 850;
     
+    private Hashtable<Integer, JLabel> zLabels;
     private JSlider zSlider;
+    
+    private Hashtable<Integer, JLabel> camLabels;
     private JSlider camSlider;
     
     private JPanel mainPanel;
@@ -73,8 +78,28 @@ public class Window extends JFrame implements ActionListener
         cubePanel = new JPanel();
         camPanel = new JPanel();
         
+        zLabels = new Hashtable<Integer, JLabel>();
+        zLabels.put(new Integer(-50), new JLabel("Near"));
+        zLabels.put(new Integer(0), new JLabel("Mid"));
+        zLabels.put(new Integer(50), new JLabel("Far"));
+        
         zSlider = new JSlider(-50, 50, 0);
+        zSlider.setMajorTickSpacing(25);
+        zSlider.setMinorTickSpacing(5);
+        zSlider.setPaintTicks(true);
+        zSlider.setPaintLabels(true);
+        zSlider.setLabelTable(zLabels);
+        
+        camLabels = new Hashtable<Integer, JLabel>();
+        camLabels.put(new Integer(0), new JLabel("Orthographic"));
+        camLabels.put(new Integer(100), new JLabel("Perspective"));
+        
         camSlider = new JSlider(0, 100, 100);
+        camSlider.setMajorTickSpacing(25);
+        camSlider.setMinorTickSpacing(5);
+        camSlider.setPaintTicks(true);
+        camSlider.setPaintLabels(true);
+        camSlider.setLabelTable(camLabels);
         
         face = new JButton("Face");
         face.addActionListener(this);
