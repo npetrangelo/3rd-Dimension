@@ -18,8 +18,8 @@ import javax.swing.SwingUtilities;
  */
 public class Window extends JFrame implements ActionListener
 {
-    public static int WIDTH = 1024;
-    public static int HEIGHT = 850;
+    public static int WIDTH = 896;
+    public static int HEIGHT = 672;
     
     private Hashtable<Integer, JLabel> zLabels;
     private JSlider zSlider;

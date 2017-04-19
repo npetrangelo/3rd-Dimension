@@ -13,18 +13,11 @@ import java.util.ArrayList;
 
 public class App {
 //    private SunGraphics2D graphics;
-    private double centerX = Window.WIDTH / 2;
-    private double centerY = Window.HEIGHT / 2;
     private static int width = 400;
     private static int height = 400;
-    public static int focalLength = 500;
-    private double y1 = 1.0;
-    private double y2 = 1.0;
-    private double z1 = 1.0;
-    private double z2 = 1.0;
-    
-    private Point prevMousePosition;
-    
+    private double centerX = Framework.frameWidth / 2;
+    private double centerY = Framework.frameHeight / 2;
+        
     private Cube cube = new Cube(50);
     private Intersection2D intersection;
     

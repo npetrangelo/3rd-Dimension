@@ -21,12 +21,12 @@ public class Framework extends JPanel implements MouseMotionListener {
     /**
      * Width of the frame.
      */
-    public static int frameWidth = 1024;
+    public static int frameWidth = 768;
 
     /**
      * Height of the frame.
      */
-    public static int frameHeight = 748;
+    public static int frameHeight = 561;
 
     /**
      * Time of one second in nanoseconds.
