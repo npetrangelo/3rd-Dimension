@@ -3,7 +3,7 @@ import java.awt.Point;
 
 public class CameraPerspective extends Camera
 {
-    private static int focalLength = 500;
+    private static int focalLength = 450;
     
     @Override
     public Point project(CubePoint pt)
