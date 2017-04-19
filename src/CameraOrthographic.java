@@ -8,7 +8,7 @@ public class CameraOrthographic extends Camera
     public Point project(CubePoint pt)
     {
         CubePoint image = transform(pt);
-        return new Point((int) (zoom * image.x), (int) (zoom * image.y));
+        return new Point((int) (image.x * zoom), (int) (image.y * zoom));
     }
 
 }
