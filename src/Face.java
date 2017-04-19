@@ -49,11 +49,11 @@ public class Face
 //        return new Face(pts);
 //    }
     
-    public void Draw(Graphics2D g2d, Camera p)
+    public void Draw(Graphics2D g2d, Camera cam)
     {
         for (CubePoint pt : points)
         {
-            Point projected = p.project(pt);
+            Point projected = cam.project(pt);
             projection.addPoint(projected.x, projected.y);
         }
         g2d.drawPolygon(projection);

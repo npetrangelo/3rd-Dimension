@@ -24,10 +24,10 @@ public class CubePoint
         z += dz;
     }
     
-    public void Draw(Graphics2D g2d, Camera p)
+    public void Draw(Graphics2D g2d, Camera cam)
     {
-        Point ppt =  p.project(this);
-        g2d.fillOval(ppt.x - 4, ppt.y - 4, 8, 8);
+        Point pt =  cam.project(this);
+        g2d.fillOval(pt.x - 4, pt.y - 4, 8, 8);
     }
     
     public double[] getMatrix()
