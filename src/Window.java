@@ -16,12 +16,10 @@ import javax.swing.border.Border;
 
 /**
  * Creates frame and set its properties.
- * 
- * @author www.gametutorial.net
  */
 public class Window extends JFrame implements ActionListener
 {
-    public static int WIDTH = 896;
+	public static int WIDTH = 896;
     public static int HEIGHT = 693;
     
     private Hashtable<Integer, JLabel> zLabels;
@@ -50,7 +48,7 @@ public class Window extends JFrame implements ActionListener
                 
     private Window()
     {
-        cam = new CameraPerspective();
+        cam = new Camera();
 //        cam = new CameraOrthographic();
         
         // Sets the title for this frame.

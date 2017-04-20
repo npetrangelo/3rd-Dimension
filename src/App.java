@@ -107,7 +107,7 @@ public class App {
      */
     public void Draw(Graphics2D g2d, Camera camera)
     {
-    	((CameraPerspective) camera).setProjectionFactor(window.getCamValue());
+    	camera.setProjectionFactor(window.getCamValue());
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, Framework.frameWidth, Framework.frameHeight);
         g2d.translate(centerX, centerY);

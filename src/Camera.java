@@ -1,16 +1,32 @@
 import java.awt.Color;
 import java.awt.Point;
 
-public abstract class Camera
+public class Camera
 {
     private double x = 0.0;
     private double y = 0.0;
     private double z = -150.0;
     private double phi = 0.0;
     
-    public abstract Point project(CubePoint point);
-    public abstract Color getCubeColor();
-    public abstract Color getIntersectionColor();
+    private static final int focalLength = 450;
+    private static final int orthoZoom = 3;
+    private double factor = 1.0;
+    
+    public Point project(CubePoint pt)
+    {
+        CubePoint image = transform(pt);
+        double projectionConstant = mix(focalLength/image.z, orthoZoom, factor);
+    	return new Point((int) (image.x * projectionConstant),
+    					 (int) (image.y * projectionConstant));
+    }
+    
+	public Color getCubeColor() {
+		return Color.BLUE;
+	}
+
+	public Color getIntersectionColor() {
+		return Color.CYAN;
+	}
     
     public CubePoint transform(CubePoint point)
     {
@@ -54,4 +70,20 @@ public abstract class Camera
         this.y = y;
         this.z = z;
     }
+    
+    public void setProjectionFactor(double factor)
+	{
+		this.factor = factor;
+	}
+	
+	/**
+	 * @param value1 The first value to mix
+	 * @param value2 The second value to mix
+	 * @param factor 0 = completely value2, 1 is completely value1
+	 * @return The mixed value
+	 */
+	private double mix(double value1, double value2, double factor)
+	{
+		return (value1 * factor) + (value2 * (1 - factor));
+	}
 }
