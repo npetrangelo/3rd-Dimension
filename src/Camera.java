@@ -8,6 +8,7 @@ public class Camera
     private double z = -150.0;
     private double phi = 0.0;
     
+    // Intersection is 150 pixels away from camera
     private static final int focalLength = 450;
     private static final int orthoZoom = 3;
     private double factor = 1.0;
@@ -15,6 +16,7 @@ public class Camera
     public Point project(CubePoint pt)
     {
         CubePoint image = transform(pt);
+        // Mix perspective and orthographic projections
         double projectionConstant = mix(focalLength/image.z, orthoZoom, factor);
     	return new Point((int) (image.x * projectionConstant),
     					 (int) (image.y * projectionConstant));
