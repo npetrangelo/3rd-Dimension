@@ -10,15 +10,8 @@ public class CameraPerspective extends Camera
     public Point project(CubePoint pt)
     {
         CubePoint image = transform(pt);
-        if (persp != 0.0)
-        {
-        	return new Point((int) (image.x * (focalLength * persp/image.z + 3*(1 - persp))),
-        					 (int) (image.y * (focalLength * persp/image.z + 3*(1 - persp))));
-        }
-        else
-        {
-            return new Point((int) (image.x * 3), (int) (image.y * 3));
-        }
+    	return new Point((int) (image.x * mix(focalLength/image.z, 3, persp)),
+    					 (int) (image.y * mix(focalLength/image.z, 3, persp)));
     }
 
 	@Override
@@ -34,5 +27,16 @@ public class CameraPerspective extends Camera
 	public void setPerspValue(double n)
 	{
 		persp = n;
+	}
+	
+	/**
+	 * @param value1 The first value to mix
+	 * @param value2 The second value to mix
+	 * @param factor 0 = completely value2, 1 is completely value1
+	 * @return The mixed value
+	 */
+	private double mix(double value1, double value2, double factor)
+	{
+		return (value1 * factor) + (value2 * (1 - factor));
 	}
 }
