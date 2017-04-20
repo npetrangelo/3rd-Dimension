@@ -4,14 +4,16 @@ import java.awt.Point;
 public class CameraPerspective extends Camera
 {
     private static final int focalLength = 450;
-    private double persp = 1.0;
+    private static final int orthoZoom = 3;
+    private double factor = 1.0;
     
     @Override
     public Point project(CubePoint pt)
     {
         CubePoint image = transform(pt);
-    	return new Point((int) (image.x * mix(focalLength/image.z, 3, persp)),
-    					 (int) (image.y * mix(focalLength/image.z, 3, persp)));
+        double projectionConstant = mix(focalLength/image.z, orthoZoom, factor);
+    	return new Point((int) (image.x * projectionConstant),
+    					 (int) (image.y * projectionConstant));
     }
 
 	@Override
@@ -24,9 +26,9 @@ public class CameraPerspective extends Camera
 		return Color.CYAN;
 	}
 	
-	public void setPerspValue(double n)
+	public void setProjectionFactor(double factor)
 	{
-		persp = n;
+		this.factor = factor;
 	}
 	
 	/**

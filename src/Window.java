@@ -1,15 +1,18 @@
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 /**
  * Creates frame and set its properties.
@@ -19,13 +22,15 @@ import javax.swing.SwingUtilities;
 public class Window extends JFrame implements ActionListener
 {
     public static int WIDTH = 896;
-    public static int HEIGHT = 672;
+    public static int HEIGHT = 693;
     
     private Hashtable<Integer, JLabel> zLabels;
     private JSlider zSlider;
     
     private Hashtable<Integer, JLabel> camLabels;
     private JSlider camSlider;
+    
+    private Border lineBorder;
     
     private JPanel mainPanel;
     private JPanel UIPanel;
@@ -73,6 +78,7 @@ public class Window extends JFrame implements ActionListener
         // Exit the application when user close frame.
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        lineBorder = BorderFactory.createLineBorder(Color.BLACK);
         mainPanel = new JPanel();
         UIPanel = new JPanel();
         cubePanel = new JPanel();
@@ -116,6 +122,7 @@ public class Window extends JFrame implements ActionListener
         cubePanel.add(zSlider);
         framework = new Framework(cam);
         
+        cubePanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Cube Controls"));
         UIPanel.add(cubePanel);
         
         top = new JButton("Top");
@@ -127,7 +134,7 @@ public class Window extends JFrame implements ActionListener
         camPanel.add(front);
         
         camPanel.add(camSlider);
-        
+        camPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Camera Controls"));
         UIPanel.add(camPanel);
         
         mainPanel.add(framework);
